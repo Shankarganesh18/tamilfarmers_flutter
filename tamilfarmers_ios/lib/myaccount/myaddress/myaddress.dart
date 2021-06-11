@@ -1,0 +1,206 @@
+import 'package:carousel_pro/carousel_pro.dart';
+import 'package:flutter/material.dart';
+import 'package:tamilfarmers_ios/category/category.dart';
+import 'package:tamilfarmers_ios/checkout/payment.dart';
+import 'package:tamilfarmers_ios/checkout/paymentmain.dart';
+
+class myaddress extends StatefulWidget {
+  @override
+  _myaddressState createState() => _myaddressState();
+}
+
+class _myaddressState extends State<myaddress> with SingleTickerProviderStateMixin{
+  bool _isInternet = true;//Internet
+
+  Animation<double> animation;
+  AnimationController controller;
+  bool viewVisible = false ;
+
+  void showWidget(){
+    setState(() {
+      viewVisible = true ;
+    });
+  }
+
+  initState() {
+    super.initState();
+
+    controller = new AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    animation = new Tween(begin: 0.0, end: 18.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+    controller.forward();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xffffffff),
+      body:
+      new ListView(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left:15.0,right:15.0,top:20.0),
+              child: new Text(
+                'Delivery Address',
+                style: new TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ),
+
+
+
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left:15.0,right:15.0,top:20.0),
+              child: new Row(
+                children: <Widget>[
+                  Expanded(
+                    child: RaisedButton(
+                      onPressed: showWidget,
+                      child: Text("ADD NEW ADDRESS",style: TextStyle(color: Colors.white),),
+                      color: Colors.green,
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+          ),
+          Visibility(
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              visible: viewVisible,
+              child: Container(
+                height: 600,
+                width: 200,
+                color: Colors.white,
+                margin: EdgeInsets.only(top: 10, bottom: 30),
+                child: new Column(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top:10.0,left:15.0,right:15.0),
+                          child: new TextField(
+                            decoration: new InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: const OutlineInputBorder(),
+                              hintText: 'Plot/House Number',
+                              labelStyle: new TextStyle(color: Colors.green),
+                            ),
+                          )
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top:10.0,left:15.0,right:15.0),
+                          child: new TextField(
+                            decoration: new InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: const OutlineInputBorder(),
+                              hintText: 'Street/Area',
+                              labelStyle: new TextStyle(color: Colors.green),
+                            ),
+                          )
+                      ),
+                    ),
+
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top:10.0,left:15.0,right:15.0),
+                          child: new TextField(
+                            decoration: new InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: const OutlineInputBorder(),
+                              hintText: 'Chennai',
+                              labelStyle: new TextStyle(color: Colors.green),
+                            ),
+                          )
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top:10.0,left:15.0,right:15.0),
+                          child: new TextField(
+                            decoration: new InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: const OutlineInputBorder(),
+                              hintText: 'Pin Code',
+                              labelStyle: new TextStyle(color: Colors.green),
+                            ),
+                          )
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top:10.0,left:15.0,right:15.0),
+                          child: new TextField(
+                            decoration: new InputDecoration(
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: const OutlineInputBorder(),
+                              hintText: 'Near Landmark',
+                              labelStyle: new TextStyle(color: Colors.green),
+                            ),
+                          )
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left:15.0,right:15.0,top:20.0),
+                        child: new Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: RaisedButton(
+                                onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>PaymentMain()));},
+                                child: Text("SAVE",style: TextStyle(color: Colors.white),),
+                                color: Colors.green,
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+          ),
+
+          Padding(padding: EdgeInsets.only(top: 10.0),),
+
+        ],
+      ),
+    );
+  }
+  dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+}
